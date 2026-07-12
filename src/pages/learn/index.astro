@@ -1,0 +1,18 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("learn")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<Layout title="Learn" description="Plain-language explainers on RLUSD, the XRP Ledger, and non-custodial wallets.">
+  <section class="wrap" style="padding-top: 56px; padding-bottom: 24px;">
+    <p class="eyebrow" style="margin-bottom: 12px;">Learn</p>
+    <h1 style="font-size: 34px; max-width: 560px;">RLUSD and the XRP Ledger, in plain terms.</h1>
+  </section>
+  <section class="wrap" style="padding-bottom: 80px;">
+    {posts.map((p) => (
+      <PostCard href={`/learn/${p.slug}`} eyebrow="Learn" title={p.data.title} excerpt={p.data.excerpt} date={p.data.date} />
+    ))}
+  </section>
+</Layout>

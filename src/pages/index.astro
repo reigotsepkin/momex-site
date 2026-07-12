@@ -1,0 +1,58 @@
+---
+import Layout from "../layouts/Layout.astro";
+import LedgerTape from "../components/LedgerTape.astro";
+import PostCard from "../components/PostCard.astro";
+import { getCollection } from "astro:content";
+
+const learnPosts = (await getCollection("learn")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const logPosts = (await getCollection("build-log")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const latest = [
+  ...learnPosts.map((p) => ({ ...p, kind: "Learn", href: `/learn/${p.slug}` })),
+  ...logPosts.map((p) => ({ ...p, kind: "Build log", href: `/build-log/${p.slug}` })),
+]
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 4);
+---
+<Layout title="Non-custodial RLUSD payments on XRPL">
+  <section class="wrap" style="padding-top: 72px; padding-bottom: 40px;">
+    <p class="eyebrow" style="margin-bottom: 16px;">Value in motion</p>
+    <h1 style="font-size: 44px; max-width: 640px; margin-bottom: 20px;">
+      RLUSD payments that settle directly, wallet to wallet.
+    </h1>
+    <p style="font-size: 17px; max-width: 520px;">
+      Momex is a non-custodial wallet and merchant POS on the XRP Ledger.
+      No custody risk, no percentage fees — just a direct trustline transfer.
+    </p>
+  </section>
+
+  <LedgerTape />
+
+  <section class="wrap" style="padding-top: 56px; padding-bottom: 16px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+      <a href="/learn" class="card">
+        <p class="eyebrow" style="margin-bottom: 8px;">Start here</p>
+        <h3 style="font-size: 20px; margin-bottom: 8px;">Learn</h3>
+        <p style="margin: 0; font-size: 14px;">
+          What RLUSD and the XRP Ledger actually are, in plain terms.
+        </p>
+      </a>
+      <a href="/build-log" class="card">
+        <p class="eyebrow" style="margin-bottom: 8px;">Follow along</p>
+        <h3 style="font-size: 20px; margin-bottom: 8px;">Build log</h3>
+        <p style="margin: 0; font-size: 14px;">
+          Notes from building Momex in public — bugs, decisions, trade-offs.
+        </p>
+      </a>
+    </div>
+  </section>
+
+  <section class="wrap" style="padding-top: 40px; padding-bottom: 80px;">
+    <h2 style="font-size: 18px; margin-bottom: 20px; color: var(--text-secondary); font-family: var(--font-mono); font-weight: 400;">
+      Latest
+    </h2>
+    {latest.map((p) => (
+      <PostCard href={p.href} eyebrow={p.kind} title={p.data.title} excerpt={p.data.excerpt} date={p.data.date} />
+    ))}
+  </section>
+</Layout>

@@ -1,0 +1,16 @@
+---
+interface Props {
+  href: string;
+  eyebrow: string;
+  title: string;
+  excerpt: string;
+  date: Date;
+}
+const { href, eyebrow, title, excerpt, date } = Astro.props;
+const dateStr = date.toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" });
+---
+<a href={href} class="card" style="display: block; margin-bottom: 16px;">
+  <p class="eyebrow" style="margin-bottom: 8px;">{eyebrow} · {dateStr}</p>
+  <h3 style="font-size: 19px; margin-bottom: 8px;">{title}</h3>
+  <p style="margin: 0; font-size: 14px;">{excerpt}</p>
+</a>

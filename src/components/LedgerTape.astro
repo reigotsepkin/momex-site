@@ -1,0 +1,47 @@
+---
+const rows = [
+  { tag: "1042", item: "coffee", amount: "4.50 RLUSD", status: "paid" },
+  { tag: "1043", item: "bag of rice", amount: "12.90 RLUSD", status: "paid" },
+  { tag: "1044", item: "haircut", amount: "22.00 RLUSD", status: "paid" },
+  { tag: "1045", item: "netflix subscription", amount: "15.49 RLUSD", status: "paid" },
+  { tag: "1046", item: "phone case", amount: "9.99 XRP", status: "paid" },
+  { tag: "1047", item: "car wash", amount: "18.00 RLUSD", status: "paid" },
+];
+const doubled = [...rows, ...rows];
+---
+<div style="border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); overflow: hidden; background: var(--surface);">
+  <div class="tape">
+    {doubled.map((r) => (
+      <span class="row mono">
+        <span style="color: var(--text-muted);">dt:{r.tag}</span>
+        <span style="color: var(--text-secondary); margin: 0 8px;">{r.item}</span>
+        <span style="color: var(--text-primary); margin-right: 8px;">{r.amount}</span>
+        <span style="color: var(--accent-strong);">{r.status}</span>
+      </span>
+    ))}
+  </div>
+</div>
+
+<style>
+  .tape {
+    display: flex;
+    width: max-content;
+    animation: scroll 28s linear infinite;
+    padding: 14px 0;
+  }
+  .row {
+    display: inline-flex;
+    align-items: center;
+    font-size: 13px;
+    padding: 0 28px;
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+  }
+  @keyframes scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tape { animation: none; }
+  }
+</style>

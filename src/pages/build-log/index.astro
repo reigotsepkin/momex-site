@@ -1,0 +1,18 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PostCard from "../../components/PostCard.astro";
+import { getCollection } from "astro:content";
+
+const posts = (await getCollection("build-log")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+---
+<Layout title="Build log" description="Notes from building Momex in public.">
+  <section class="wrap" style="padding-top: 56px; padding-bottom: 24px;">
+    <p class="eyebrow" style="margin-bottom: 12px;">Build log</p>
+    <h1 style="font-size: 34px; max-width: 560px;">Building Momex in public.</h1>
+  </section>
+  <section class="wrap" style="padding-bottom: 80px;">
+    {posts.map((p) => (
+      <PostCard href={`/build-log/${p.slug}`} eyebrow="Build log" title={p.data.title} excerpt={p.data.excerpt} date={p.data.date} />
+    ))}
+  </section>
+</Layout>
