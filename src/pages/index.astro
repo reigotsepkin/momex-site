@@ -15,15 +15,28 @@ const latest = [
   .slice(0, 4);
 ---
 <Layout title="Non-custodial RLUSD payments on XRPL">
-  <section class="wrap" style="padding-top: 72px; padding-bottom: 40px;">
-    <p class="eyebrow" style="margin-bottom: 16px;">Value in motion</p>
-    <h1 style="font-size: 44px; max-width: 640px; margin-bottom: 20px;">
-      RLUSD payments that settle directly, wallet to wallet.
-    </h1>
-    <p style="font-size: 17px; max-width: 520px;">
-      Momex is a non-custodial wallet and merchant POS on the XRP Ledger.
-      No custody risk, no percentage fees — just a direct trustline transfer.
-    </p>
+  <section class="wrap hero" style="padding-top: 72px; padding-bottom: 48px;">
+    <div class="hero-text">
+      <p class="eyebrow" style="margin-bottom: 16px;">Value in motion</p>
+      <h1 style="font-size: 44px; margin-bottom: 20px;">
+        RLUSD payments that settle directly, wallet to wallet.
+      </h1>
+      <p style="font-size: 17px; max-width: 460px;">
+        Momex is a non-custodial wallet and merchant POS on the XRP Ledger.
+        No custody risk, no percentage fees — just a direct trustline transfer.
+      </p>
+    </div>
+    <div class="hero-video">
+      <video
+        src="/momex-demo.mov"
+        autoplay
+        loop
+        muted
+        playsinline
+        preload="auto"
+        style="width: 100%; max-width: 300px; border-radius: 24px; border: 1px solid var(--border); background: #000;"
+      ></video>
+    </div>
   </section>
 
   <LedgerTape />
@@ -56,3 +69,30 @@ const latest = [
     ))}
   </section>
 </Layout>
+
+<style>
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+  }
+  .hero-text {
+    flex: 1;
+  }
+  .hero-video {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+  }
+  @media (max-width: 720px) {
+    .hero {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 32px;
+    }
+    .hero-video {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+</style>
