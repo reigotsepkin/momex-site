@@ -171,6 +171,13 @@ declare module 'astro:content' {
   collection: "learn";
   data: any
 } & { render(): Render[".md"] };
+"why-accept-stablecoins.md": {
+	id: "why-accept-stablecoins.md";
+  slug: "why-accept-stablecoins";
+  body: string;
+  collection: "learn";
+  data: any
+} & { render(): Render[".md"] };
 };
 
 	};
